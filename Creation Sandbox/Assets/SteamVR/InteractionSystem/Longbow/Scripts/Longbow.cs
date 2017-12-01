@@ -386,7 +386,7 @@ namespace Valve.VR.InteractionSystem
 
 
 		//-------------------------------------------------
-		public void ReleaseNock() 
+		public void ReleaseNock()
 		{
 			// ArrowHand tells us to do this when we release the buttons when bow is nocked but not drawn far enough
 			nocked = false;

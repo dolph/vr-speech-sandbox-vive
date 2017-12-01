@@ -61,7 +61,7 @@ AudioMixerEffectController:
   m_ObjectHideFlags: 3
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: 
+  m_Name:
   m_EffectID: 4fe7d14b1f1d32e4ea6ba53280a6994f
   m_EffectName: Attenuation
   m_MixLevel: 597915611f5dc8f4595f81984921ef26
@@ -74,7 +74,7 @@ AudioMixerEffectController:
   m_ObjectHideFlags: 3
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: 
+  m_Name:
   m_EffectID: b159a4013f8179a43948169d360ae95c
   m_EffectName: Attenuation
   m_MixLevel: 582d8ffb31d150645964d295628a47a3

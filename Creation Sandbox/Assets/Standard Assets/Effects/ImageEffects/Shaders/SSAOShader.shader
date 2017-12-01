@@ -62,7 +62,7 @@ ENDCG
 
 	// ---- SSAO pass, 8 samples
 	Pass {
-		
+
 CGPROGRAM
 #pragma vertex vert_ao
 #pragma fragment frag
@@ -90,7 +90,7 @@ ENDCG
 
 // ---- SSAO pass, 14 samples
 	Pass {
-		
+
 CGPROGRAM
 #pragma vertex vert_ao
 #pragma fragment frag
@@ -121,10 +121,10 @@ half4 frag (v2f_ao i) : SV_Target
 ENDCG
 
 	}
-	
+
 // ---- SSAO pass, 26 samples
 	Pass {
-		
+
 CGPROGRAM
 #pragma vertex vert_ao
 #pragma fragment frag
@@ -211,14 +211,14 @@ inline half CheckSame (half4 n, half4 nn)
 half4 frag( v2f i ) : SV_Target
 {
 	#define NUM_BLUR_SAMPLES 4
-	
+
     float2 o = _TexelOffsetScale.xy;
-    
+
     half sum = tex2D(_SSAO, i.uv).r * (NUM_BLUR_SAMPLES + 1);
     half denom = NUM_BLUR_SAMPLES + 1;
-    
+
     half4 geom = tex2D (_CameraDepthNormalsTexture, i.uv);
-    
+
     for (int s = 0; s < NUM_BLUR_SAMPLES; ++s)
     {
         float2 nuv = i.uv + o * (s+1);
@@ -239,7 +239,7 @@ half4 frag( v2f i ) : SV_Target
 }
 ENDCG
 	}
-	
+
 	// ---- Composite pass
 	Pass {
 CGPROGRAM

@@ -10,18 +10,18 @@ Properties {
 SubShader {
 	Pass {
 		ZTest Always Cull Off ZWrite Off
-				
+
 CGPROGRAM
 #pragma vertex vert
 #pragma fragment frag
 #include "UnityCG.cginc"
 
-struct v2f { 
+struct v2f {
 	float4 pos	: SV_POSITION;
 	float2 uv	: TEXCOORD0;
 	float2 uvg	: TEXCOORD1; // grain
 	float2 uvs	: TEXCOORD2; // scratch
-}; 
+};
 
 uniform sampler2D _MainTex;
 uniform sampler2D _GrainTex;
@@ -44,13 +44,13 @@ v2f vert (appdata_img v)
 fixed4 frag (v2f i) : SV_Target
 {
 	fixed4 col = tex2D(_MainTex, i.uv);
-	
+
 	// convert to YUV
 	fixed3 yuv;
 	yuv.x = dot( col.rgb, half3(0.299,0.587,0.114) );
 	yuv.y = (col.b-yuv.x)*0.492;
 	yuv.z = (col.r-yuv.x)*0.877;
-	
+
 	// sample noise texture and do a signed add
 	fixed3 grain = tex2D(_GrainTex, i.uvg).rgb * 2 - 1;
 	yuv.rgb += grain * _Intensity.x;

@@ -5,11 +5,11 @@ Shader "Hidden/MultipassHollywoodFlares" {
 		_MainTex ("Base (RGB)", 2D) = "" {}
 		_NonBlurredTex ("Base (RGB)", 2D) = "" {}
 	}
-	
+
 	CGINCLUDE
 
 	#include "UnityCG.cginc"
-	
+
 	struct v2f {
 		half4 pos : SV_POSITION;
 		half2 uv : TEXCOORD0;
@@ -19,18 +19,18 @@ Shader "Hidden/MultipassHollywoodFlares" {
 		half4 pos : SV_POSITION;
 		half2 uv[7] : TEXCOORD0;
 	};
-	
+
 	half4 offsets;
 	half4 tintColor;
-	
+
 	half stretchWidth;
 	half2 _Threshhold;
-	
+
 	half4 _MainTex_TexelSize;
-	
+
 	sampler2D _MainTex;
 	sampler2D _NonBlurredTex;
-		
+
 	v2f vert (appdata_img v) {
 		v2f o;
 		o.pos = UnityObjectToClipPos(v.vertex);
@@ -41,7 +41,7 @@ Shader "Hidden/MultipassHollywoodFlares" {
 	v2f_opts vertStretch (appdata_img v) {
 		v2f_opts o;
 		o.pos = UnityObjectToClipPos(v.vertex);
-		half b = stretchWidth;		
+		half b = stretchWidth;
 		o.uv[0] = v.texcoord.xy;
 		o.uv[1] = v.texcoord.xy + b * 2.0 * offsets.xy;
 		o.uv[2] = v.texcoord.xy - b * 2.0 * offsets.xy;
@@ -51,7 +51,7 @@ Shader "Hidden/MultipassHollywoodFlares" {
 		o.uv[6] = v.texcoord.xy - b * 6.0 * offsets.xy;
 		return o;
 	}
-	
+
 	v2f_opts vertVerticalCoords (appdata_img v) {
 		v2f_opts o;
 		o.pos = UnityObjectToClipPos(v.vertex);
@@ -63,8 +63,8 @@ Shader "Hidden/MultipassHollywoodFlares" {
 		o.uv[5] = v.texcoord.xy + 2.5 * _MainTex_TexelSize.xy * half2(0,1);
 		o.uv[6] = v.texcoord.xy - 2.5 * _MainTex_TexelSize.xy * half2(0,1);
 		return o;
-	}	
-		
+	}
+
 	// deprecated
 	half4 fragPrepare (v2f i) : SV_Target {
 		half4 color = tex2D (_MainTex, i.uv);
@@ -93,8 +93,8 @@ Shader "Hidden/MultipassHollywoodFlares" {
 		color = max (color, tex2D (_MainTex, i.uv[5]));
 		color = max (color, tex2D (_MainTex, i.uv[6]));
 		return color;
-	}	
-	
+	}
+
 	half4 fragPost (v2f_opts i) : SV_Target {
 		half4 color = tex2D (_MainTex, i.uv[0]);
 		color += tex2D (_MainTex, i.uv[1]);
@@ -107,50 +107,50 @@ Shader "Hidden/MultipassHollywoodFlares" {
 	}
 
 	ENDCG
-	
+
 Subshader {
 	  ZTest Always Cull Off ZWrite Off
- Pass {     
+ Pass {
 
       CGPROGRAM
-      
+
       #pragma vertex vert
       #pragma fragment fragPrepare
-      
+
       ENDCG
   }
 
- Pass {     
+ Pass {
 
       CGPROGRAM
-      
+
       #pragma vertex vertStretch
       #pragma fragment fragStretch
-      
+
       ENDCG
   }
 
- Pass {     
+ Pass {
 
       CGPROGRAM
-      
+
       #pragma vertex vertVerticalCoords
       #pragma fragment fragPreAndCut
-      
-      ENDCG
-  } 
 
- Pass {     
+      ENDCG
+  }
+
+ Pass {
 
       CGPROGRAM
-      
+
       #pragma vertex vertVerticalCoords
       #pragma fragment fragPost
-      
+
       ENDCG
-  } 
+  }
 }
-	
+
 Fallback off
-	
+
 }

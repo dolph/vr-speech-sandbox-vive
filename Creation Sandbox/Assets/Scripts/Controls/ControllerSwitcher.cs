@@ -23,7 +23,7 @@ public class ControllerSwitcher : MonoBehaviour {
     public Material highlightColor;
     public Material defaultColor;
 
-    
+
 
     #region Init and Lifecycle
     // Use this for initialization
@@ -36,10 +36,10 @@ public class ControllerSwitcher : MonoBehaviour {
             EnableTeleport();
         }
     }
-	
+
 	// Update is called once per frame
 	void Update () {
-	
+
 	}
     #endregion
 

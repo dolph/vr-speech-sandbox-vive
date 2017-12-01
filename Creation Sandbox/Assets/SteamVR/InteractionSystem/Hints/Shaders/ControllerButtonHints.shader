@@ -1,6 +1,6 @@
 ﻿//======= Copyright (c) Valve Corporation, All rights reserved. ===============
 //
-// Purpose: 
+// Purpose:
 //
 //=============================================================================
 // UNITY_SHADER_NO_UPGRADE
@@ -35,7 +35,7 @@ Shader "Valve/VR/ControllerButtonHints"
 
 			#pragma vertex MainVS
 			#pragma fragment MainPS
-			
+
 			// Includes -------------------------------------------------------------------------------------------------------------------------------------------------
 			#include "UnityCG.cginc"
 
@@ -52,7 +52,7 @@ Shader "Valve/VR/ControllerButtonHints"
 
 			// Globals --------------------------------------------------------------------------------------------------------------------------------------------------
 			float4 _SceneTint;
-			
+
 			// MainVs ---------------------------------------------------------------------------------------------------------------------------------------------------
 			VertexOutput MainVS( VertexInput i )
 			{
@@ -61,10 +61,10 @@ Shader "Valve/VR/ControllerButtonHints"
 				o.vertex = UnityObjectToClipPos(i.vertex);
 #else
 				o.vertex = mul(UNITY_MATRIX_MVP, i.vertex);
-#endif				
+#endif
 				return o;
 			}
-			
+
 			// MainPs ---------------------------------------------------------------------------------------------------------------------------------------------------
 			float4 MainPS( VertexOutput i ) : SV_Target
 			{
@@ -85,7 +85,7 @@ Shader "Valve/VR/ControllerButtonHints"
 
 			#pragma vertex MainVS
 			#pragma fragment MainPS
-			
+
 			// Includes -------------------------------------------------------------------------------------------------------------------------------------------------
 			#include "UnityCG.cginc"
 
@@ -106,7 +106,7 @@ Shader "Valve/VR/ControllerButtonHints"
 			sampler2D _MainTex;
 			float4 _MainTex_ST;
 			float4 _Color;
-			
+
 			// MainVs ---------------------------------------------------------------------------------------------------------------------------------------------------
 			VertexOutput MainVS( VertexInput i )
 			{
@@ -117,10 +117,10 @@ Shader "Valve/VR/ControllerButtonHints"
 				o.vertex = mul(UNITY_MATRIX_MVP, i.vertex);
 #endif
 				o.uv = TRANSFORM_TEX( i.uv, _MainTex );
-				
+
 				return o;
 			}
-			
+
 			// MainPs ---------------------------------------------------------------------------------------------------------------------------------------------------
 			float4 MainPS( VertexOutput i ) : SV_Target
 			{

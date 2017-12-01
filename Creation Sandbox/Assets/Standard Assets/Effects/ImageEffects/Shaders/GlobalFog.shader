@@ -11,25 +11,25 @@ CGINCLUDE
 
 	uniform sampler2D _MainTex;
 	uniform sampler2D_float _CameraDepthTexture;
-	
+
 	// x = fog height
 	// y = FdotC (CameraY-FogHeight)
 	// z = k (FdotC > 0.0)
 	// w = a/2
 	uniform float4 _HeightParams;
-	
+
 	// x = start distance
 	uniform float4 _DistanceParams;
-	
+
 	int4 _SceneFogMode; // x = fog mode, y = use radial flag
 	float4 _SceneFogParams;
 	#ifndef UNITY_APPLY_FOG
 	half4 unity_FogColor;
 	half4 unity_FogDensity;
-	#endif	
+	#endif
 
 	uniform float4 _MainTex_TexelSize;
-	
+
 	// for fast world space reconstruction
 	uniform float4x4 _FrustumCornersWS;
 	uniform float4 _CameraWS;
@@ -40,7 +40,7 @@ CGINCLUDE
 		float2 uv_depth : TEXCOORD1;
 		float4 interpolatedRay : TEXCOORD2;
 	};
-	
+
 	v2f vert (appdata_img v)
 	{
 		v2f o;
@@ -49,18 +49,18 @@ CGINCLUDE
 		o.pos = UnityObjectToClipPos(v.vertex);
 		o.uv = v.texcoord.xy;
 		o.uv_depth = v.texcoord.xy;
-		
+
 		#if UNITY_UV_STARTS_AT_TOP
 		if (_MainTex_TexelSize.y < 0)
 			o.uv.y = 1-o.uv.y;
-		#endif				
-		
+		#endif
+
 		o.interpolatedRay = _FrustumCornersWS[(int)index];
 		o.interpolatedRay.w = index;
-		
+
 		return o;
 	}
-	
+
 	// Applies one of standard fog formulas, given fog coordinate (i.e. distance)
 	half ComputeFogFactor (float coord)
 	{
@@ -86,7 +86,7 @@ CGINCLUDE
 	// Distance-based fog
 	float ComputeDistance (float3 camDir, float zdepth)
 	{
-		float dist; 
+		float dist;
 		if (_SceneFogMode.y == 1)
 			dist = length(camDir);
 		else
@@ -121,7 +121,7 @@ CGINCLUDE
 	half4 ComputeFog (v2f i, bool distance, bool height) : SV_Target
 	{
 		half4 sceneColor = tex2D(_MainTex, i.uv);
-		
+
 		// Reconstruct world space position & direction
 		// towards this screen pixel.
 		float rawDepth = SAMPLE_DEPTH_TEXTURE(_CameraDepthTexture,i.uv_depth);
@@ -142,7 +142,7 @@ CGINCLUDE
 		if (rawDepth == _DistanceParams.y)
 			fogFac = 1.0;
 		//return fogFac; // for debugging
-		
+
 		// Lerp between fog color & original scene color
 		// by fog amount
 		return lerp (unity_FogColor, sceneColor, fogFac);

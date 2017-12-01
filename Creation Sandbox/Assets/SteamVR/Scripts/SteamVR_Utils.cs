@@ -536,7 +536,7 @@ public static class SteamVR_Utils
 
 						RenderTexture.active = targetTexture;
 						texture.ReadPixels(new Rect(0, 0, targetTexture.width, targetTexture.height), uTarget, vTarget + vTargetOffset);
-						RenderTexture.active = null;                 
+						RenderTexture.active = null;
 					}
 
 					// Update progress

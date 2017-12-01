@@ -17,12 +17,12 @@ public class TargetGroup : MonoBehaviour {
         {
             target.OnShot += new TargetShotHandler(OnTargetShot);
         }
-	
+
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
-	
+
 	}
 
     public void Show()

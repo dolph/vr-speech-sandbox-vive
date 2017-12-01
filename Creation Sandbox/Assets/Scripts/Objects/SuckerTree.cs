@@ -24,7 +24,7 @@ public class SuckerTree : CreatableObject {
             this.matKey = _mKeys[treeColor];
             foliage.GetComponent<Renderer>().material = _mValues[treeColor];
         }
-        
+
 
     }
 

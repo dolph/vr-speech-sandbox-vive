@@ -8,7 +8,7 @@ Properties {
 SubShader {
 	Pass {
 		ZTest Always Cull Off ZWrite Off
-				
+
 CGPROGRAM
 #pragma vertex vert
 #pragma fragment frag
@@ -38,10 +38,10 @@ float4 frag (v2f i) : SV_Target
 	float2 distortedOffset = MultiplyUV (_RotationMatrix, offset.xy);
 	float2 tmp = offset / _CenterRadius.zw;
 	float t = min (1, length(tmp));
-	
+
 	offset = lerp (distortedOffset, offset, t);
 	offset += _CenterRadius.xy;
-	
+
 	return tex2D(_MainTex, offset);
 }
 ENDCG

@@ -5,11 +5,11 @@ Shader "Hidden/BlurAndFlares" {
 		_MainTex ("Base (RGB)", 2D) = "" {}
 		_NonBlurredTex ("Base (RGB)", 2D) = "" {}
 	}
-	
+
 	CGINCLUDE
 
 	#include "UnityCG.cginc"
-	
+
 	struct v2f {
 		half4 pos : SV_POSITION;
 		half2 uv : TEXCOORD0;
@@ -28,19 +28,19 @@ Shader "Hidden/BlurAndFlares" {
 		half4 uv45 : TEXCOORD3;
 		half4 uv67 : TEXCOORD4;
 	};
-	
+
 	half4 _Offsets;
 	half4 _TintColor;
-	
+
 	half _StretchWidth;
 	half2 _Threshhold;
 	half _Saturation;
-	
+
 	half4 _MainTex_TexelSize;
-	
+
 	sampler2D _MainTex;
 	sampler2D _NonBlurredTex;
-		
+
 	v2f vert (appdata_img v) {
 		v2f o;
 		o.pos = UnityObjectToClipPos(v.vertex);
@@ -57,13 +57,13 @@ Shader "Hidden/BlurAndFlares" {
 		o.uv45 =  v.texcoord.xyxy + _Offsets.xyxy * half4(1,1, -1,-1) * 3.0;
 		o.uv67 =  v.texcoord.xyxy + _Offsets.xyxy * half4(1,1, -1,-1) * 4.0;
 		o.uv67 =  v.texcoord.xyxy + _Offsets.xyxy * half4(1,1, -1,-1) * 5.0;
-		return o;  
+		return o;
 	}
 
 	v2f_opts vertStretch (appdata_img v) {
 		v2f_opts o;
 		o.pos = UnityObjectToClipPos(v.vertex);
-		half b = _StretchWidth;		
+		half b = _StretchWidth;
 		o.uv[0] = v.texcoord.xy;
 		o.uv[1] = v.texcoord.xy + b * 2.0 * _Offsets.xy;
 		o.uv[2] = v.texcoord.xy - b * 2.0 * _Offsets.xy;
@@ -73,7 +73,7 @@ Shader "Hidden/BlurAndFlares" {
 		o.uv[6] = v.texcoord.xy - b * 6.0 * _Offsets.xy;
 		return o;
 	}
-	
+
 	v2f_opts vertWithMultiCoords (appdata_img v) {
 		v2f_opts o;
 		o.pos = UnityObjectToClipPos(v.vertex);
@@ -85,7 +85,7 @@ Shader "Hidden/BlurAndFlares" {
 		o.uv[5] = v.texcoord.xy + 2.5 * _MainTex_TexelSize.xy * _Offsets.xy;
 		o.uv[6] = v.texcoord.xy - 2.5 * _MainTex_TexelSize.xy * _Offsets.xy;
 		return o;
-	}	
+	}
 
 	half4 fragPostNoBlur (v2f i) : SV_Target {
 		half4 color = tex2D (_MainTex, i.uv);
@@ -100,11 +100,11 @@ Shader "Hidden/BlurAndFlares" {
 		color += 0.110 * tex2D (_MainTex, i.uv23.xy);
 		color += 0.110 * tex2D (_MainTex, i.uv23.zw);
 		color += 0.075 * tex2D (_MainTex, i.uv45.xy);
-		color += 0.075 * tex2D (_MainTex, i.uv45.zw);	
+		color += 0.075 * tex2D (_MainTex, i.uv45.zw);
 		color += 0.0525 * tex2D (_MainTex, i.uv67.xy);
 		color += 0.0525 * tex2D (_MainTex, i.uv67.zw);
 		return color;
-	} 
+	}
 
 	half4 fragPreAndCut (v2f_opts i) : SV_Target {
 		half4 color = tex2D (_MainTex, i.uv[0]);
@@ -129,8 +129,8 @@ Shader "Hidden/BlurAndFlares" {
 		color = max (color, tex2D (_MainTex, i.uv[5]));
 		color = max (color, tex2D (_MainTex, i.uv[6]));
 		return color;
-	}	
-	
+	}
+
 	half4 fragPost (v2f_opts i) : SV_Target {
 		half4 color = tex2D (_MainTex, i.uv[0]);
 		color += tex2D (_MainTex, i.uv[1]);
@@ -143,62 +143,62 @@ Shader "Hidden/BlurAndFlares" {
 	}
 
 	ENDCG
-	
+
 Subshader {
 	  ZTest Always Cull Off ZWrite Off
- Pass {     
+ Pass {
 
       CGPROGRAM
-      
+
       #pragma vertex vert
       #pragma fragment fragPostNoBlur
-      
+
       ENDCG
   }
 
- Pass {     
+ Pass {
 
       CGPROGRAM
-      
+
       #pragma vertex vertStretch
       #pragma fragment fragStretch
-      
+
       ENDCG
   }
 
  // 2
- Pass {     
+ Pass {
 
       CGPROGRAM
-      
+
       #pragma vertex vertWithMultiCoords
       #pragma fragment fragPreAndCut
-      
+
       ENDCG
-  } 
+  }
 
  // 3
- Pass {     
+ Pass {
 
       CGPROGRAM
-      
+
       #pragma vertex vertWithMultiCoords
       #pragma fragment fragPost
-      
+
       ENDCG
   }
  // 4
- Pass {     
+ Pass {
 
       CGPROGRAM
-      
+
       #pragma vertex vertWithMultiCoords2
       #pragma fragment fragGaussBlur
-      
+
       ENDCG
-  } 
+  }
 }
-	
+
 Fallback off
-	
+
 }

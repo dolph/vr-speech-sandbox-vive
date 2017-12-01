@@ -4,23 +4,23 @@ Shader "Hidden/LensFlareCreate" {
 	Properties {
 		_MainTex ("Base (RGB)", 2D) = "" {}
 	}
-	
+
 	CGINCLUDE
-	
+
 	#include "UnityCG.cginc"
-	
+
 	struct v2f {
 		float4 pos : SV_POSITION;
 		float2 uv[4] : TEXCOORD0;
 	};
-		
+
 	fixed4 colorA;
-	fixed4 colorB; 
-	fixed4 colorC; 
-	fixed4 colorD; 
-	
+	fixed4 colorB;
+	fixed4 colorC;
+	fixed4 colorD;
+
 	sampler2D _MainTex;
-		
+
 	v2f vert( appdata_img v ) {
 		v2f o;
 		o.pos = UnityObjectToClipPos(v.vertex);
@@ -31,7 +31,7 @@ Shader "Hidden/LensFlareCreate" {
 		o.uv[3] = ( ( v.texcoord.xy - 0.5 ) * -4.15 ) + 0.5;
 		return o;
 	}
-	
+
 	fixed4 frag(v2f i) : SV_Target {
 		fixed4 color = float4 (0,0,0,0);
 		color += tex2D(_MainTex, i.uv[0] ) * colorA;
@@ -42,7 +42,7 @@ Shader "Hidden/LensFlareCreate" {
 	}
 
 	ENDCG
-	
+
 Subshader {
  Blend One One
  Pass {
@@ -56,7 +56,7 @@ Subshader {
       ENDCG
   }
 }
-	
+
 Fallback off
 
 } // shader

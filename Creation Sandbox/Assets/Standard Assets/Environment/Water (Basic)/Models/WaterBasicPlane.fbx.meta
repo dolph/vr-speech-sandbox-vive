@@ -22,8 +22,8 @@ ModelImporter:
     legacyGenerateAnimations: 0
     bakeSimulation: 0
     optimizeGameObjects: 0
-    motionNodeName: 
-    pivotNodeName: 
+    motionNodeName:
+    pivotNodeName:
     animationCompression: 1
     animationRotationError: .5
     animationPositionError: .5
@@ -65,9 +65,9 @@ ModelImporter:
     armStretch: .0500000007
     legStretch: .0500000007
     feetSpacing: 0
-    rootMotionBoneName: 
+    rootMotionBoneName:
   lastHumanDescriptionAvatarSource: {instanceID: 0}
   animationType: 1
   additionalBone: 0
-  userData: 
-  assetBundleName: 
+  userData:
+  assetBundleName:

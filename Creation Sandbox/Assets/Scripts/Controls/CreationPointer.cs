@@ -66,7 +66,7 @@ public class CreationPointer : VRTK_WorldPointer {
             }
         }
     }
-	
+
 	// Update is called once per frame
 	protected override void Update () {
         base.Update();
@@ -112,7 +112,7 @@ public class CreationPointer : VRTK_WorldPointer {
         eventArgs.controllerIndex = (uint)controller.GetComponent<SteamVR_TrackedObject>().index;
 
         CreationPointerSet(this, eventArgs);
-        
+
     }
 
     private void SetPointerTransform(float setLength)

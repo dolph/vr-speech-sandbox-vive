@@ -105,7 +105,7 @@ public class CreatableObject : VRTK_InteractableObject
 
     #region Modifying Object
     public virtual void ApplyMaterial(string matKey)
-    { 
+    {
         if (mats == null)
         {
             InitializeMaterials();

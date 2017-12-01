@@ -6,9 +6,9 @@ Shader "Hidden/SeparableBlur" {
 	}
 
 	CGINCLUDE
-	
+
 	#include "UnityCG.cginc"
-	
+
 	struct v2f {
 		float4 pos : SV_POSITION;
 		float2 uv : TEXCOORD0;
@@ -17,11 +17,11 @@ Shader "Hidden/SeparableBlur" {
 		float4 uv23 : TEXCOORD2;
 		float4 uv45 : TEXCOORD3;
 	};
-	
+
 	float4 offsets;
-	
+
 	sampler2D _MainTex;
-		
+
 	v2f vert (appdata_img v) {
 		v2f o;
 		o.pos = UnityObjectToClipPos(v.vertex);
@@ -32,9 +32,9 @@ Shader "Hidden/SeparableBlur" {
 		o.uv23 =  v.texcoord.xyxy + offsets.xyxy * float4(1,1, -1,-1) * 2.0;
 		o.uv45 =  v.texcoord.xyxy + offsets.xyxy * float4(1,1, -1,-1) * 3.0;
 
-		return o;  
+		return o;
 	}
-		
+
 	half4 frag (v2f i) : SV_Target {
 		half4 color = float4 (0,0,0,0);
 
@@ -44,13 +44,13 @@ Shader "Hidden/SeparableBlur" {
 		color += 0.10 * tex2D (_MainTex, i.uv23.xy);
 		color += 0.10 * tex2D (_MainTex, i.uv23.zw);
 		color += 0.05 * tex2D (_MainTex, i.uv45.xy);
-		color += 0.05 * tex2D (_MainTex, i.uv45.zw);	
-		
+		color += 0.05 * tex2D (_MainTex, i.uv45.zw);
+
 		return color;
-	} 
+	}
 
 	ENDCG
-	
+
 Subshader {
  Pass {
 	  ZTest Always Cull Off ZWrite Off
@@ -64,5 +64,5 @@ Subshader {
 
 Fallback off
 
-	
+
 } // shader

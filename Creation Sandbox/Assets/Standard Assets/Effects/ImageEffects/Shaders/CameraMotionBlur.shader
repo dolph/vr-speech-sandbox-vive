@@ -17,7 +17,7 @@
 	ScatterFromGather:
 	Combines Reconstruction with depth of field type defocus
  */
- 
+
  Shader "Hidden/CameraMotionBlur" {
 	Properties {
 		_MainTex ("-", 2D) = "" {}
@@ -27,9 +27,9 @@
 	}
 
 	CGINCLUDE
-	
+
 	#include "UnityCG.cginc"
-	
+
 	// 's' in paper (# of samples for reconstruction)
 	#define NUM_SAMPLES (11)
 	// # samples for valve style blur
@@ -37,7 +37,7 @@
 	// 'k' in paper
 	float _MaxRadiusOrKInPaper;
 
-	static const int SmallDiscKernelSamples = 12;		
+	static const int SmallDiscKernelSamples = 12;
 	static const float2 SmallDiscKernel[SmallDiscKernelSamples] =
 	{
 		float2(-0.326212,-0.40581),
@@ -54,59 +54,59 @@
 		float2(-0.791559,-0.59771)
 	};
 
-	struct v2f 
+	struct v2f
 	{
 		float4 pos : SV_POSITION;
 		float2 uv  : TEXCOORD0;
 	};
-				
+
 	sampler2D _MainTex;
 	sampler2D_float _CameraDepthTexture;
 	sampler2D _VelTex;
 	sampler2D _NeighbourMaxTex;
 	sampler2D _NoiseTex;
 	sampler2D _TileTexDebug;
-	
+
 	float4 _MainTex_TexelSize;
 	float4 _CameraDepthTexture_TexelSize;
 	float4 _VelTex_TexelSize;
-	
+
 	float4x4 _InvViewProj;	// inverse view-projection matrix
 	float4x4 _PrevViewProj;	// previous view-projection matrix
 	float4x4 _ToPrevViewProjCombined; // combined
 
 	float _Jitter;
-	
+
 	float _VelocityScale;
 	float _DisplayVelocityScale;
 
 	float _MaxVelocity;
 	float _MinVelocity;
-	
+
 	float4 _BlurDirectionPacked;
-	
+
 	float _SoftZDistance;
-	
-	v2f vert(appdata_img v) 
+
+	v2f vert(appdata_img v)
 	{
 		v2f o;
 		o.pos = UnityObjectToClipPos(v.vertex);
 		o.uv = v.texcoord.xy;
 		return o;
 	}
-	
+
 	float4 CameraVelocity(v2f i) : SV_Target
 	{
 		float2 depth_uv = i.uv;
 
 		#if UNITY_UV_STARTS_AT_TOP
 		if (_MainTex_TexelSize.y < 0)
-			depth_uv.y = 1 - depth_uv.y;	
+			depth_uv.y = 1 - depth_uv.y;
 		#endif
 
 		// read depth
 		float d = SAMPLE_DEPTH_TEXTURE(_CameraDepthTexture, depth_uv);
-		
+
 		// calculate position from pixel from depth
 		float3 clipPos = float3(i.uv.x*2.0-1.0, (i.uv.y)*2.0-1.0, d);
 
@@ -137,7 +137,7 @@
 		float2 velOut = vel * max(0.5, min(vellen, maxVel)) / (vellen + 1e-2f);
 		velOut *= _MainTex_TexelSize.xy;
 		return float4(velOut, 0.0, 0.0);
-		
+
 	}
 
 	// vector with largest magnitude
@@ -160,7 +160,7 @@
   	  	{
   	  		for(int k=0; k<(int)_MaxRadiusOrKInPaper; k++)
   	  		{
-				maxvel = vmax(maxvel, tex2Dlod(_MainTex, baseUv + float4(l,k,0,0) * uvScale).xy);  	  		
+				maxvel = vmax(maxvel, tex2Dlod(_MainTex, baseUv + float4(l,k,0,0) * uvScale).xy);
   	  		}
   	  	}
   	  	return float4(maxvel, 0, 1);
@@ -183,9 +183,9 @@
 		nx = vmax(nx, tex2D(_MainTex, x_+float2(-1.0, 0.0)*_MainTex_TexelSize.xy).xy);
 		nx = vmax(nx, tex2D(_MainTex, x_+float2(-1.0,-1.0)*_MainTex_TexelSize.xy).xy);
 
-  	  	return float4(nx, 0, 0);		
+  	  	return float4(nx, 0, 0);
 	}
-	 	 	
+
 	float4 Debug(v2f i) : SV_Target
 	{
 		return saturate( float4(tex2D(_MainTex, i.uv).x,abs(tex2D(_MainTex, i.uv).y),-tex2D(_MainTex, i.uv).xy) * _DisplayVelocityScale);
@@ -229,12 +229,12 @@
 			float4 cy = tex2D(_MainTex, y);
 			sum += cy;
 		}
-		sum /= NUM_SAMPLES;		
+		sum /= NUM_SAMPLES;
 		return sum;
 	}
 
 	float4 ReconstructFilterBlur(v2f i) : SV_Target
-	{	
+	{
 		// uv's
 
 		float2 x = i.uv;
@@ -246,10 +246,10 @@
 		#endif
 
 		float2 x2 = xf;
-		
+
 		float2 vn = tex2Dlod(_NeighbourMaxTex, float4(x2,0,0)).xy;	// largest velocity in neighbourhood
 		float4 cx = tex2Dlod(_MainTex, float4(x,0,0));				// color at x
-		float2 vx = tex2Dlod(_VelTex, float4(xf,0,0)).xy;			// vel at x 
+		float2 vx = tex2Dlod(_VelTex, float4(xf,0,0)).xy;			// vel at x
 
 		float zx = SAMPLE_DEPTH_TEXTURE_LOD(_CameraDepthTexture, float4(x,0,0));
 		zx = -Linear01Depth(zx);
@@ -260,11 +260,11 @@
 		// sample current pixel
 		float weight = 0.75; // <= good start weight choice??
 		float4 sum = cx * weight;
- 
+
 		int centerSample = (int)(NUM_SAMPLES-1)/2;
- 
-		for(int l=0; l<NUM_SAMPLES; l++) 
-		{ 
+
+		for(int l=0; l<NUM_SAMPLES; l++)
+		{
 			float contrib = 1.0f;
 		#if SHADER_API_D3D11
 			if (l==centerSample) continue;	// skip center sample
@@ -273,7 +273,7 @@
 		#endif
 
 			float t = lerp(-1.0, 1.0, (l + j) / (-1 + _Jitter + (float)NUM_SAMPLES));
-			//float t = lerp(-1.0, 1.0, l / (float)(NUM_SAMPLES - 1)); 
+			//float t = lerp(-1.0, 1.0, l / (float)(NUM_SAMPLES - 1));
 
 			float2 y = x + vn * t;
 
@@ -283,10 +283,10 @@
 	    		yf.y = 1-yf.y;
 			#endif
 
-			// velocity at y 
+			// velocity at y
 			float2 vy = tex2Dlod(_VelTex, float4(yf,0,0)).xy;
 
-			float zy = SAMPLE_DEPTH_TEXTURE_LOD(_CameraDepthTexture, float4(y,0,0)); 
+			float zy = SAMPLE_DEPTH_TEXTURE_LOD(_CameraDepthTexture, float4(y,0,0));
 			zy = -Linear01Depth(zy);
 			float f = softDepthCompare(zx, zy);
 			float b = softDepthCompare(zy, zx);
@@ -314,7 +314,7 @@
 
 		float2 vn 			= tex2Dlod(_NeighbourMaxTex, float4(x2,0,0)).xy;	// largest velocity in neighbourhood
 		float4 cx 			= tex2Dlod(_MainTex, float4(x,0,0));				// color at x
-		float2 vx 			= tex2Dlod(_VelTex, float4(xf,0,0)).xy;			// vel at x 
+		float2 vx 			= tex2Dlod(_VelTex, float4(xf,0,0)).xy;			// vel at x
 
 		float4 noise 		= tex2Dlod(_NoiseTex, float4(i.uv,0,0)*11.0f)*2-1;
 		float zx 			= SAMPLE_DEPTH_TEXTURE_LOD(_CameraDepthTexture, float4(x,0,0));
@@ -327,7 +327,7 @@
 
 		float weight = 1.0; // <- maybe tweak this: bluriness amount ...
 		float4 sum = cx * weight;
-		
+
 		float4 jitteredDir = vn.xyxy + noise.xyyz;
 #ifdef SHADER_API_D3D11
 		jitteredDir = max(abs(jitteredDir.xyxy), _MainTex_TexelSize.xyxy * _MaxVelocity * 0.5) * sign(jitteredDir.xyxy)  * float4(1,1,-1,-1);
@@ -345,10 +345,10 @@
 	    		yf.yw = 1-yf.yw;
 			#endif
 
-			// velocity at y 
+			// velocity at y
 			float2 vy = tex2Dlod(_VelTex, float4(yf.xy,0,0)).xy;
 
-			float zy = SAMPLE_DEPTH_TEXTURE_LOD(_CameraDepthTexture, float4(y.xy,0,0) ); 
+			float zy = SAMPLE_DEPTH_TEXTURE_LOD(_CameraDepthTexture, float4(y.xy,0,0) );
 			zy = -Linear01Depth(zy);
 
 			float f = softDepthCompare(zx, zy);
@@ -363,7 +363,7 @@
 
 			vy = tex2Dlod(_VelTex, float4(yf.zw,0,0)).xy;
 
-			zy = SAMPLE_DEPTH_TEXTURE_LOD(_CameraDepthTexture, float4(y.zw,0,0) ); 
+			zy = SAMPLE_DEPTH_TEXTURE_LOD(_CameraDepthTexture, float4(y.zw,0,0) );
 			zy = -Linear01Depth(zy);
 
 			f = softDepthCompare(zx, zy);
@@ -373,7 +373,7 @@
 			cy = tex2Dlod(_MainTex, float4(y.zw,0,0));
 			sum += cy * alphay;
 			weight += alphay;
-			
+
 #endif
 		}
 
@@ -392,13 +392,13 @@
 		blurDir += _BlurDirectionPacked.z * rollVector;
 		blurDir += _BlurDirectionPacked.w * insideVector;
 		blurDir *= _VelocityScale;
- 
+
 		// clamp to maximum velocity (in pixels)
 		float velMag = length(blurDir);
 		if (velMag > _MaxVelocity) {
 			blurDir *= (_MaxVelocity / velMag);
 			velMag = _MaxVelocity;
-		} 
+		}
 
 		float4 centerTap = tex2D(_MainTex, x);
 		float4 sum = centerTap;
@@ -415,11 +415,11 @@
 
 		return sum/(1+MOTION_SAMPLES);
 	}
-		 	 	  	 	  	 	  	 	 		 	 	  	 	  	 	  	 	 		 	 	  	 	  	 	  	 	 
+
 	ENDCG
-	
+
 Subshader {
- 
+
 	// pass 0
 	Pass {
 		ZTest Always Cull Off ZWrite On Blend Off
@@ -474,7 +474,7 @@ Subshader {
 
 		CGPROGRAM
 		#pragma target 3.0
-		#pragma vertex vert 
+		#pragma vertex vert
 		#pragma fragment ReconstructFilterBlur
 
 		ENDCG
@@ -511,7 +511,7 @@ Subshader {
 		#pragma vertex vert
 		#pragma fragment ReconstructionDiscBlur
 		ENDCG
-	}  	
+	}
   }
 
 Fallback off

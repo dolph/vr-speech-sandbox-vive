@@ -123,7 +123,7 @@ public class GameManager : MonoBehaviour {
 
     // Update is called once per frame
     protected virtual void Update () {
-	
+
 	}
 
     void InitializeObjects()
@@ -221,7 +221,7 @@ public class GameManager : MonoBehaviour {
     public virtual void CreateObject(string key, string matKey)
     {
         GameObject newObject = objects[key];
-   
+
         // Check Right
         Vector3? tempDestination = rightDestination;
         string hand = "right";
@@ -241,7 +241,7 @@ public class GameManager : MonoBehaviour {
         if (newObject != null && tempDestination != null)
         {
             Vector3 destination = (Vector3)tempDestination;
-            Vector3 location = new Vector3(destination.x, destination.y + newObject.transform.position.y, destination.z);     
+            Vector3 location = new Vector3(destination.x, destination.y + newObject.transform.position.y, destination.z);
             Debug.Log(Analytics.CustomEvent("createdObject", new Dictionary<string, object> { {"objectKey", key }, {"pointerHand", hand } }));
 
             if (matKey != null && newObject.GetComponent<CreatableObject>().isCustomizable)
@@ -251,7 +251,7 @@ public class GameManager : MonoBehaviour {
             }
 
             Instantiate(newObject, location, newObject.transform.rotation);
-            
+
         }
     }
 
@@ -354,7 +354,7 @@ public class GameManager : MonoBehaviour {
             {
                 DataManager.dManager.isLoaded = true;
             }
-        
+
             DataManager.dManager.Save();
         } else {
             Debug.LogWarning("No Data Manager.");

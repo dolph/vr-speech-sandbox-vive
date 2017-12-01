@@ -1,7 +1,7 @@
 // Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
 
 
-Shader "Hidden/MotionBlurClear" 
+Shader "Hidden/MotionBlurClear"
 {
 
 Properties { }
@@ -33,7 +33,7 @@ Pass {
 	ps_input vert (vs_input v)
 	{
 		ps_input o;
-		o.pos = UnityObjectToClipPos (v.vertex);	
+		o.pos = UnityObjectToClipPos (v.vertex);
 		o.screen = ComputeScreenPos(o.pos);
 		COMPUTE_EYEDEPTH(o.screen.z);
 		return o;
@@ -46,7 +46,7 @@ Pass {
 
 		float d = SAMPLE_DEPTH_TEXTURE_PROJ(_CameraDepthTexture, UNITY_PROJ_COORD(i.screen));
 		d = LinearEyeDepth(d);
-		
+
 		clip(d - i.screen.z + 1e-2f);
 		return float4(0, 0, 0, 0);
 	}

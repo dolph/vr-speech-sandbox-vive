@@ -746,7 +746,7 @@ public class SteamVR_RenderModel : MonoBehaviour
 	}
 
     /// <summary>
-    /// Helper function to handle the inconvenient fact that the packing for RenderModel_t is 
+    /// Helper function to handle the inconvenient fact that the packing for RenderModel_t is
     /// different on Linux/OSX (4) than it is on Windows (8)
     /// </summary>
     /// <param name="pRenderModel">native pointer to the RenderModel_t</param>
@@ -768,7 +768,7 @@ public class SteamVR_RenderModel : MonoBehaviour
     }
 
     /// <summary>
-    /// Helper function to handle the inconvenient fact that the packing for RenderModel_TextureMap_t is 
+    /// Helper function to handle the inconvenient fact that the packing for RenderModel_TextureMap_t is
     /// different on Linux/OSX (4) than it is on Windows (8)
     /// </summary>
     /// <param name="pRenderModel">native pointer to the RenderModel_TextureMap_t</param>

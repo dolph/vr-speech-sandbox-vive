@@ -18,7 +18,7 @@ CGPROGRAM
 
 uniform sampler2D _MainTex;
 uniform float4 _MainTex_TexelSize;
- 
+
 struct v2f {
 	float4 pos : SV_POSITION;
 };

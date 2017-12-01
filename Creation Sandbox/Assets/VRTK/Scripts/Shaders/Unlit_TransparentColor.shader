@@ -14,7 +14,7 @@
 		Blend SrcAlpha OneMinusSrcAlpha
 		//AlphaTest Greater 0.001  // uncomment if you have problems like the sprites or 3d text have white quads instead of alpha pixels.
 		Tags{ Queue = Transparent }
-		
+
 		SubShader
 		{
 			Pass

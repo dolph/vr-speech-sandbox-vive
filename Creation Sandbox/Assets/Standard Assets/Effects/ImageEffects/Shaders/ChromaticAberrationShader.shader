@@ -4,34 +4,34 @@ Shader "Hidden/ChromaticAberration" {
 	Properties {
 		_MainTex ("Base", 2D) = "" {}
 	}
-	
+
 	CGINCLUDE
-	
+
 	#include "UnityCG.cginc"
-	
+
 	struct v2f {
 		float4 pos : SV_POSITION;
 		float2 uv : TEXCOORD0;
 	};
-	
+
 	sampler2D _MainTex;
-	
+
 	float4 _MainTex_TexelSize;
 	half _ChromaticAberration;
 	half _AxialAberration;
 	half _Luminance;
 	half2 _BlurDistance;
-		
-	v2f vert( appdata_img v ) 
+
+	v2f vert( appdata_img v )
 	{
 		v2f o;
 		o.pos = UnityObjectToClipPos(v.vertex);
 		o.uv = v.texcoord.xy;
-		
+
 		return o;
-	} 
-	
-	half4 fragDs(v2f i) : SV_Target 
+	}
+
+	half4 fragDs(v2f i) : SV_Target
 	{
 		half4 c = tex2D (_MainTex, i.uv.xy + _MainTex_TexelSize.xy * 0.5);
 		c += tex2D (_MainTex, i.uv.xy - _MainTex_TexelSize.xy * 0.5);
@@ -40,14 +40,14 @@ Shader "Hidden/ChromaticAberration" {
 		return c/4.0;
 	}
 
-	half4 frag(v2f i) : SV_Target 
+	half4 frag(v2f i) : SV_Target
 	{
 		half2 coords = i.uv;
 		half2 uv = i.uv;
-		
-		coords = (coords - 0.5) * 2.0;		
+
+		coords = (coords - 0.5) * 2.0;
 		half coordDot = dot (coords,coords);
-		
+
 		half2 uvG = uv - _MainTex_TexelSize.xy * _ChromaticAberration * coords * coordDot;
 		half4 color = tex2D (_MainTex, uv);
 		#if SHADER_API_D3D9
@@ -56,12 +56,12 @@ Shader "Hidden/ChromaticAberration" {
 		#else
 			color.g = tex2D (_MainTex, uvG).g;
 		#endif
-		
+
 		return color;
 	}
 
 	// squeezing into SM2.0 with 9 samples:
-	static const int SmallDiscKernelSamples = 9;		
+	static const int SmallDiscKernelSamples = 9;
 	static const half2 SmallDiscKernel[SmallDiscKernelSamples] =
 	{
 		half2(-0.926212,-0.40581),
@@ -75,13 +75,13 @@ Shader "Hidden/ChromaticAberration" {
 		half2(-0.32194,-0.932615),
 	};
 
-	half4 fragComplex(v2f i) : SV_Target 
+	half4 fragComplex(v2f i) : SV_Target
 	{
 		half2 coords = i.uv;
 		half2 uv = i.uv;
-		
+
 		// corner heuristic
-		coords = (coords - 0.5h) * 2.0h;		
+		coords = (coords - 0.5h) * 2.0h;
 		half coordDot = dot (coords,coords);
 
 		half4 color = tex2D (_MainTex, uv);
@@ -108,17 +108,17 @@ Shader "Hidden/ChromaticAberration" {
 
 		half lumDiff = Luminance(abs(blurredTap.rgb-color.rgb));
 		half isEdge = saturate(_Luminance * lumDiff);
-		
+
 		// debug #2:
 		//return isEdge;
 
 		color.rb = lerp(color.rb, blurredTap.rb, isEdge);
-		
+
 		return color;
 	}
 
-	ENDCG 
-	
+	ENDCG
+
 Subshader {
 
  // 0: box downsample
@@ -126,10 +126,10 @@ Subshader {
 	  ZTest Always Cull Off ZWrite Off
 
       CGPROGRAM
-      
+
       #pragma vertex vert
       #pragma fragment fragDs
-      
+
       ENDCG
   }
 // 1: simple chrom aberration
@@ -137,10 +137,10 @@ Pass {
 	  ZTest Always Cull Off ZWrite Off
 
       CGPROGRAM
-      
+
       #pragma vertex vert
       #pragma fragment frag
-      
+
       ENDCG
   }
 // 2: simulates more chromatic aberration effects
@@ -148,14 +148,14 @@ Pass {
 	  ZTest Always Cull Off ZWrite Off
 
       CGPROGRAM
-      
+
       #pragma vertex vert
       #pragma fragment fragComplex
-      
+
       ENDCG
-  }  
+  }
 }
 
 Fallback off
-	
+
 } // shader

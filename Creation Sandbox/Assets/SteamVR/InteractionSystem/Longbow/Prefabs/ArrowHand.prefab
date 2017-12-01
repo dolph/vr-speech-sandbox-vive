@@ -210,8 +210,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b8d4cc6cf300b3e4bb1411c4e041030c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   teleportAllowed: 1
   overrideHoverLock: 1
 --- !u!114 &11426438
@@ -223,8 +223,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 57468e6cbae21894fa42c90413c294ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   itemPackage: {fileID: 11450054, guid: 98a3ad29136d5c04f8a025adf1cbd704, type: 2}
 --- !u!114 &11443248
 MonoBehaviour:
@@ -235,8 +235,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: eb6d6653511aff5409d0827d4e3b79ea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
 --- !u!114 &11444572
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -246,8 +246,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5240357a2468cdc4291b266bee3cb9b9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
 --- !u!114 &11447524
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -257,8 +257,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d85480da87762944399dab6c99985eef, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   arrowPrefab: {fileID: 173732, guid: 81fc1450441aca64e8cc1a0e14b1aa77, type: 2}
   arrowNockTransform: {fileID: 413922}
   nockDistance: 0.1
@@ -276,8 +276,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 32c1c9a5bbab2e54280027c0ecaf42db, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   waveFiles:
   - {fileID: 8300000, guid: f7c5046ea350a2c4b898e99dbca46c22, type: 3}
   - {fileID: 8300000, guid: 6fdc84052ddcc024c9c9bafadc8c591e, type: 3}
@@ -301,11 +301,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 0}
       propertyPath: arrowPrefab
-      value: 
+      value:
       objectReference: {fileID: 173732, guid: 2b3299b874e32384b9ef8946f6c896fd, type: 2}
     - target: {fileID: 0}
       propertyPath: itemPackage
-      value: 
+      value:
       objectReference: {fileID: 11450054, guid: e297a0c27ec3ade46aa52a4ad8583d32,
         type: 2}
     - target: {fileID: 0}
@@ -318,7 +318,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: prefab
-      value: 
+      value:
       objectReference: {fileID: 173732, guid: 2b3299b874e32384b9ef8946f6c896fd, type: 2}
     - target: {fileID: 0}
       propertyPath: limit

@@ -12,7 +12,7 @@ public class ControllerListener : MonoBehaviour
     public Menu MenuCanvas;
     public bool DebugMode = false;
     public bool AllowsMenu = true;
-    
+
     protected bool isTouching = false;
     protected GameObject touchedObject;
     protected bool isHolding = false;
@@ -73,9 +73,9 @@ public class ControllerListener : MonoBehaviour
 
             controllerEvents.AliasPointerOn += new ControllerInteractionEventHandler(DoPointerOn);
             controllerEvents.AliasPointerOff += new ControllerInteractionEventHandler(DoPointerOff);
-            
+
         }
-        
+
     }
 
     protected virtual void OnDisable()
@@ -101,7 +101,7 @@ public class ControllerListener : MonoBehaviour
 
             controllerEvents.AliasPointerOn -= DoPointerOn;
             controllerEvents.AliasPointerOff -= DoPointerOff;
-            
+
         }
     }
     #endregion

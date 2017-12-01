@@ -21,7 +21,7 @@ namespace VRTK
     public delegate void DashTeleportEventHandler(object sender, DashTeleportEventArgs e);
 
     /// <summary>
-    /// The dash teleporter extends the height adjust teleporter and allows to have the `[CameraRig]` dashing to a new teleport location. 
+    /// The dash teleporter extends the height adjust teleporter and allows to have the `[CameraRig]` dashing to a new teleport location.
     /// </summary>
     /// <remarks>
     /// Like the basic teleporter and the height adjustable teleporter the Dash Teleport script is attached to the `[CameraRig]` prefab and requires a World Pointer to be available.

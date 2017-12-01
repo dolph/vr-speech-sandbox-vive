@@ -42,7 +42,7 @@ Shader "VRTK/AdaptiveQualityDebugVisualization"
 					o.rgba = fixed4(0.0, 0.0, 0.0, 1.0);
 
 					uint nLevel = i.uv.x * _LevelsCount;
-					
+
 					// Thin bar showing colors
 					if (i.uv.y <= 0.1)
 					{

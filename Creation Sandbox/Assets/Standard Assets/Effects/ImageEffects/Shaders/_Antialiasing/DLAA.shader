@@ -14,7 +14,7 @@ Properties {
 }
 
 CGINCLUDE
-	
+
 	#include "UnityCG.cginc"
 
 	uniform sampler2D _MainTex;
@@ -24,14 +24,14 @@ CGINCLUDE
 		float4 pos : SV_POSITION;
 		float2 uv : TEXCOORD0;
 	};
-	
+
 	#define LD( o, dx, dy ) o = tex2D( _MainTex, texCoord + float2( dx, dy ) * _MainTex_TexelSize.xy );
-	
+
 	float GetIntensity( float3 col )
 	{
     	return dot( col, float3( 0.33f, 0.33f, 0.33f ) );
-	}	
-	
+	}
+
 	float4 highPassPre( float2 texCoord )
 	{
 	 	LD(float4 sCenter, 0.0,0.0)
@@ -39,21 +39,21 @@ CGINCLUDE
 	 	LD(float4 sUpRight, 1.0,-1.0)
 	 	LD(float4 sDownLeft, -1.0,1.0)
 	 	LD(float4 sDownRight, 1.0,1.0)
-	 
+
 		float4 diff		= 4.0f * abs( (sUpLeft + sUpRight + sDownLeft + sDownRight) - 4.0f * sCenter );
 		float edgeMask	= GetIntensity(diff.xyz);
-	
+
 		return float4(sCenter.rgb, edgeMask);
 	}
-	
+
 	// Softer (5-pixel wide high-pass)
 	/*
 	void HighPassEdgeHV (out float4 edge_h, out float4 edge_v, float4 center, float4 w_h, float4 w_v, float2 texCoord) {
         edge_h = abs( w_h - 4.0f * center ) / 4.0f;
-        edge_v = abs( w_v - 4.0f * center ) / 4.0f;		
+        edge_v = abs( w_v - 4.0f * center ) / 4.0f;
 	}
 
-	// Sharper (3-pixel wide high-pass)	
+	// Sharper (3-pixel wide high-pass)
 	void EdgeHV (out float4 edge_h, out float4 edge_v, float4 center, float2 texCoord) {
         float4 left, right, top, bottom;
 
@@ -61,24 +61,24 @@ CGINCLUDE
         LD( right,  1,  0 )
         LD( top,    0, -1 )
         LD( bottom, 0,  1 )
-        
+
         edge_h = abs( left + right - 2.0f * center ) / 2.0f;
-        edge_v = abs( top + bottom - 2.0f * center ) / 2.0f;		
-	} 
+        edge_v = abs( top + bottom - 2.0f * center ) / 2.0f;
+	}
 	*/
-	
+
 	float4 edgeDetectAndBlur(  float2 texCoord )
 	{
 	float lambda = 3.0f;
 	float epsilon = 0.1f;
-    
+
     //
     // Short Edges
     //
-    
+
     float4 center, left_01, right_01, top_01, bottom_01;
 
-    // sample 5x5 cross    
+    // sample 5x5 cross
     LD( center,      0,   0 )
     LD( left_01,  -1.5,   0 )
     LD( right_01,  1.5,   0 )
@@ -89,11 +89,11 @@ CGINCLUDE
     float4 w_h = 2.0f * ( left_01 + right_01 );
     float4 w_v = 2.0f * ( top_01 + bottom_01 );
 
-    
+
         // Softer (5-pixel wide high-pass)
         float4 edge_h = abs( w_h - 4.0f * center ) / 4.0f;
         float4 edge_v = abs( w_v - 4.0f * center ) / 4.0f;
-        
+
 
     float4 blurred_h = ( w_h + 2.0f * center ) / 6.0f;
     float4 blurred_v = ( w_v + 2.0f * center ) / 6.0f;
@@ -113,7 +113,7 @@ CGINCLUDE
     //
     // Long Edges
     //
-    
+
     float4 h0, h1, h2, h3, h4, h5, h6, h7;
     float4 v0, v1, v2, v3, v4, v5, v6, v7;
 
@@ -171,20 +171,20 @@ CGINCLUDE
     }
 
     return clr;
-  	}	
+  	}
 
 	float4 edgeDetectAndBlurSharper(float2 texCoord)
 	{
 	float lambda = 3.0f;
 	float epsilon = 0.1f;
-    
+
     //
     // Short Edges
     //
-    
+
     float4 center, left_01, right_01, top_01, bottom_01;
 
-    // sample 5x5 cross    
+    // sample 5x5 cross
     LD( center,      0,   0 )
     LD( left_01,  -1.5,   0 )
     LD( right_01,  1.5,   0 )
@@ -202,7 +202,7 @@ CGINCLUDE
         LD( right,  1,  0 )
         LD( top,    0, -1 )
         LD( bottom, 0,  1 )
-        
+
         float4 edge_h = abs( left + right - 2.0f * center ) / 2.0f;
         float4 edge_v = abs( top + bottom - 2.0f * center ) / 2.0f;
 
@@ -224,7 +224,7 @@ CGINCLUDE
     //
     // Long Edges
     //
-    
+
     float4 h0, h1, h2, h3, h4, h5, h6, h7;
     float4 v0, v1, v2, v3, v4, v5, v6, v7;
 
@@ -252,7 +252,7 @@ CGINCLUDE
         float right_lum  = GetIntensity( right.xyz );
         float top_lum    = GetIntensity( top.xyz );
         float bottom_lum = GetIntensity( bottom.xyz );
- 
+
         float4 clr_v = center;
         float4 clr_h = center;
 
@@ -275,70 +275,70 @@ CGINCLUDE
     }
 
     return clr;
-  	}	
+  	}
 
 
 	v2f vert( appdata_img v ) {
 		v2f o;
 		o.pos = UnityObjectToClipPos (v.vertex);
-		
+
 		float2 uv = v.texcoord.xy;
 		o.uv.xy = uv;
-		
+
 		return o;
 	}
 
-	half4 fragFirst (v2f i) : SV_Target {		 	 	    
+	half4 fragFirst (v2f i) : SV_Target {
 		return highPassPre (i.uv);
 	}
-	
-	half4 fragSecond (v2f i) : SV_Target {		 	 	    
+
+	half4 fragSecond (v2f i) : SV_Target {
 	    return edgeDetectAndBlur( i.uv );
 	}
 
-	half4 fragThird (v2f i) : SV_Target {		 	 	    
+	half4 fragThird (v2f i) : SV_Target {
 	    return edgeDetectAndBlurSharper( i.uv );
 	}
-			
-ENDCG	
+
+ENDCG
 
 SubShader {
 	Pass {
 		ZTest Always Cull Off ZWrite Off
-	
+
 		CGPROGRAM
-	
+
 		#pragma vertex vert
 		#pragma fragment fragFirst
         #pragma exclude_renderers d3d11_9x
-		
-		ENDCG
-	}
-	
-	Pass {
-		ZTest Always Cull Off ZWrite Off
-	
-		CGPROGRAM
-	
-		#pragma vertex vert
-		#pragma fragment fragSecond
-		#pragma target 3.0
-        #pragma exclude_renderers d3d11_9x
-		
+
 		ENDCG
 	}
 
 	Pass {
 		ZTest Always Cull Off ZWrite Off
-	
+
 		CGPROGRAM
-	
+
+		#pragma vertex vert
+		#pragma fragment fragSecond
+		#pragma target 3.0
+        #pragma exclude_renderers d3d11_9x
+
+		ENDCG
+	}
+
+	Pass {
+		ZTest Always Cull Off ZWrite Off
+
+		CGPROGRAM
+
 		#pragma vertex vert
 		#pragma fragment fragThird
 		#pragma target 3.0
-		
+
 		ENDCG
-	}	
+	}
 }
 
 Fallback off

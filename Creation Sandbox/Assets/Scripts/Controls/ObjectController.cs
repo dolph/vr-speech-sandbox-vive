@@ -245,7 +245,7 @@ public class ObjectController : ControllerListener
     override protected void DoTouchpadClicked(object sender, ControllerInteractionEventArgs e)
     {
         base.DoTouchpadClicked(sender, e);
-        
+
         if(isHolding && heldObject.GetComponent<CreatableObject>())
         {
             float magnitude = Mathf.Sqrt(e.touchpadAxis.x * e.touchpadAxis.x + e.touchpadAxis.y * e.touchpadAxis.y);
@@ -283,7 +283,7 @@ public class ObjectController : ControllerListener
                     decreaseSize = true;
                 }
             }
-            
+
         }
     }
 

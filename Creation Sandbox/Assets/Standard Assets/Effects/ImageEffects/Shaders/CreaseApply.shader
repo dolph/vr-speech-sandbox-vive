@@ -43,12 +43,12 @@ half4 frag (v2f i) : SV_Target
 {
 	float4 hrDepth = tex2D(_HrDepthTex, i.uv);
 	float4 lrDepth = tex2D(_LrDepthTex, i.uv);
-	
+
 	hrDepth.a = DecodeFloatRGBA(hrDepth);
 	lrDepth.a = DecodeFloatRGBA(lrDepth);
-	
+
 	float4 color = tex2D(_MainTex, i.uv);
-	
+
 	return color * (1.0-abs(hrDepth.a-lrDepth.a)*intensity);
 }
 

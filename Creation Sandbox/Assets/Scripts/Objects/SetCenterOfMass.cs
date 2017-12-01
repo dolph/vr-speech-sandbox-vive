@@ -11,9 +11,9 @@ public class SetCenterOfMass : MonoBehaviour {
         rigidBody = GetComponent<Rigidbody>();
         rigidBody.centerOfMass = centerOfMass;
     }
-	
+
 	// Update is called once per frame
 	void Update () {
-	
+
 	}
 }

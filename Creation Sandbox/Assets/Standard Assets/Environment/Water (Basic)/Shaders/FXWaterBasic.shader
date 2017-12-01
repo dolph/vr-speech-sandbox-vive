@@ -74,10 +74,10 @@ half4 frag( v2f i ) : COLOR
 	half3 bump1 = UnpackNormal(tex2D( _BumpMap, i.bumpuv[0] )).rgb;
 	half3 bump2 = UnpackNormal(tex2D( _BumpMap, i.bumpuv[1] )).rgb;
 	half3 bump = (bump1 + bump2) * 0.5;
-	
+
 	half fresnel = dot( i.viewDir, bump );
 	half4 water = tex2D( _ColorControl, float2(fresnel,fresnel) );
-	
+
 	half4 col;
 	col.rgb = lerp( water.rgb, _horizonColor.rgb, water.a );
 	col.a = _horizonColor.a;

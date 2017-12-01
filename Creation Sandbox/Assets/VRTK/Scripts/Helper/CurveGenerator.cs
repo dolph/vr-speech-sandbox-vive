@@ -3,7 +3,7 @@
 // Purpose: To generate a bezier curve between at least 4 points in space and draw
 // a number of spheres across the generated curve
 //
-// This script is heavily based on the tutorial at: 
+// This script is heavily based on the tutorial at:
 // http://catlikecoding.com/unity/tutorials/curves-and-splines/
 //
 //====================================================================================

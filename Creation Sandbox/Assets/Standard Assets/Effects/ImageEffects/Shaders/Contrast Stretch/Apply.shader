@@ -14,7 +14,7 @@ Category {
 	SubShader {
 		Pass {
 			ZTest Always Cull Off ZWrite Off
-				
+
 CGPROGRAM
 #pragma vertex vert
 #pragma fragment frag
@@ -23,7 +23,7 @@ CGPROGRAM
 struct v2f {
 	float4 pos		: SV_POSITION;
 	float2 uv[2]	: TEXCOORD0;
-}; 
+};
 
 uniform sampler2D _MainTex;
 uniform sampler2D _AdaptTex;
@@ -43,7 +43,7 @@ float4 frag (v2f i) : SV_Target
 	float4 adapted = tex2D(_AdaptTex, i.uv[1]);
 	float vmul = 1.0 / adapted.z;
 	float vadd = -adapted.w;
-	col.rgb = col.rgb * vmul + vadd;	
+	col.rgb = col.rgb * vmul + vadd;
 	return col;
 }
 ENDCG

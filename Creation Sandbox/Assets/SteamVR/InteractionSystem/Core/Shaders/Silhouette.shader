@@ -139,7 +139,7 @@ Shader "Valve/VR/Silhouette"
 				Comp always
 				Pass replace
 			}
-		
+
 			CGPROGRAM
 				#pragma vertex MainVs
 				#pragma fragment NullPs

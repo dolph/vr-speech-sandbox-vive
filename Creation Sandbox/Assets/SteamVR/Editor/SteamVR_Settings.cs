@@ -179,7 +179,7 @@ public class SteamVR_Settings : EditorWindow
 	}
 
 	Vector2 scrollPosition;
-	
+
 	string GetResourcePath()
 	{
 		var ms = MonoScript.FromScriptableObject(this);

@@ -12,7 +12,7 @@ Category {
 	SubShader {
 		Pass {
 			ZTest Always Cull Off ZWrite Off
-				
+
 CGPROGRAM
 #pragma vertex vert_img
 #pragma fragment frag
@@ -26,7 +26,7 @@ float4 frag (v2f_img i) : SV_Target  {
 	// value is: max, min
 	float2 valAdapted = tex2D(_MainTex, i.uv).xy;
 	float2 valCur = tex2D(_CurTex, i.uv).xy;
-	
+
 	// Calculate new adapted values: interpolate
 	// from valAdapted to valCur by script-supplied amount.
 	//
@@ -44,17 +44,17 @@ float4 frag (v2f_img i) : SV_Target  {
 
 	float4 valNew;
 	valNew.xy = valAdapted + delta;
-	
+
 	// Impose user limits on maximum/minimum values
 	valNew.x = max( valNew.x, _AdaptParams.z );
 	valNew.y = min( valNew.y, _AdaptParams.y );
-	
+
 	// Optimization so that our final apply pass is faster:
 	// z = max-min (plus a small amount to prevent division by zero)
 	valNew.z = valNew.x - valNew.y + 0.01;
 	// w = min/(max-min)
 	valNew.w = valNew.y / valNew.z;
-	
+
 	return valNew;
 }
 ENDCG

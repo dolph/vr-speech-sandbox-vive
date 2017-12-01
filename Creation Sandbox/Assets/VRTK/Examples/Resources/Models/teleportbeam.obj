@@ -1,9 +1,9 @@
-# 
+#
 # Wavefront OBJ file
 # 2016 Giovanni Paolo Vigano'
 # for SteamVR Unity Toolkit
 # https://github.com/thestonefox/SteamVR_Unity_Toolkit
-# 
+#
 mtllib teleportbeam.mtl
 # object beam
 g beam

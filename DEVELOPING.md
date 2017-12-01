@@ -22,7 +22,7 @@ Here is a general overview of some of the more important directories in the proj
 │   │   │   ├── Objects                 // scripts related to the objects that can be created
 │   │   │   ├── SceneManagement         // scripts related to manageing scene state
 │   │   │   ├── Tutorial                // scripts related to running the tutorial
-│   │   │   └── UI                      // scripts related to any menuing 
+│   │   │   └── UI                      // scripts related to any menuing
 │   │   ├── SteamVR                 // the SteamVR plugin
 │   │   └── VRTK                    // the VRTK plugin
 │   └── ProjectSettings         // contains configuration files for the project

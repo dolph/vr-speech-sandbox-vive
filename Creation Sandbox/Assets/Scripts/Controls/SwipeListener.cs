@@ -42,9 +42,9 @@ public class SwipeListener : MonoBehaviour {
             return;
         }
 
-        trackedObj = GetComponent<SteamVR_TrackedObject>(); 
+        trackedObj = GetComponent<SteamVR_TrackedObject>();
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
         var device = SteamVR_Controller.Input((int)trackedObj.index);

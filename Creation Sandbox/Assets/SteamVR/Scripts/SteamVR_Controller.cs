@@ -221,7 +221,7 @@ public class SteamVR_Controller
 					score = (cross.y < 0.0f) ? 2.0f - dot : dot;
 				}
 			}
-			
+
 			if (score > best)
 			{
 				result = i;

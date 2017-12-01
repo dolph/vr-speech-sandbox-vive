@@ -37,28 +37,28 @@ Shader "Valve/VR/SeeThru"
 
 				#pragma vertex MainVS
 				#pragma fragment MainPS
-				
+
 				// Includes -------------------------------------------------------------------------------------------------------------------------------------------------
 				#include "UnityCG.cginc"
-				
+
 				// Structs --------------------------------------------------------------------------------------------------------------------------------------------------
 				struct VertexInput
 				{
 					float4 vertex : POSITION;
 					float2 uv : TEXCOORD0;
 				};
-				
+
 				struct VertexOutput
 				{
 					float2 uv : TEXCOORD0;
 					float4 vertex : SV_POSITION;
 				};
-				
+
 				// Globals --------------------------------------------------------------------------------------------------------------------------------------------------
 				sampler2D _MainTex;
 				float4 _MainTex_ST;
 				float4 _Color;
-				
+
 				// MainVs ---------------------------------------------------------------------------------------------------------------------------------------------------
 				VertexOutput MainVS( VertexInput i )
 				{
@@ -67,17 +67,17 @@ Shader "Valve/VR/SeeThru"
 					o.vertex = UnityObjectToClipPos(i.vertex);
 #else
 					o.vertex = mul(UNITY_MATRIX_MVP, i.vertex);
-#endif					
+#endif
 					o.uv = TRANSFORM_TEX( i.uv, _MainTex );
-					
+
 					return o;
 				}
-				
+
 				// MainPs ---------------------------------------------------------------------------------------------------------------------------------------------------
 				float4 MainPS( VertexOutput i ) : SV_Target
 				{
 					float4 vColor = _Color.rgba;
-				
+
 					return vColor.rgba;
 				}
 

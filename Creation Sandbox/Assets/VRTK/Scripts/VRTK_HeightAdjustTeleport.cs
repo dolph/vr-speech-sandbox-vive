@@ -116,7 +116,7 @@ namespace VRTK
 
         private void InitClimbEvents(bool state)
         {
-            // Listen for climb events 
+            // Listen for climb events
             var climbComponent = GetComponent<VRTK_PlayerClimb>();
             if (climbComponent)
             {

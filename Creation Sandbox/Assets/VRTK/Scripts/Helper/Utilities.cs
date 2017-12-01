@@ -112,7 +112,7 @@
         }
 
         /// <summary>
-        /// Returns the signed angle between the two vectors, v1 and v2, 
+        /// Returns the signed angle between the two vectors, v1 and v2,
         /// with normal 'n' as the rotation axis.
         /// </summary>
         public static float AngleSigned(Vector3 v1, Vector3 v2, Vector3 n)

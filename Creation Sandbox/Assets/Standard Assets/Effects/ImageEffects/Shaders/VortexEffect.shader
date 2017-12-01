@@ -49,12 +49,12 @@ float4 frag (v2f i) : SV_Target
 	angle = angle * angle * _Angle;
 	float cosLength, sinLength;
 	sincos (angle, sinLength, cosLength);
-	
+
 	float2 uv;
 	uv.x = cosLength * offset[0] - sinLength * offset[1];
 	uv.y = sinLength * offset[0] + cosLength * offset[1];
 	uv += _CenterRadius.xy;
-	
+
 	return tex2D(_MainTex, uv);
 }
 ENDCG

@@ -131,7 +131,7 @@ namespace VRTK
 
         private void InitTeleportListener(bool state)
         {
-            // Listen for teleport events 
+            // Listen for teleport events
             VRTK_BasicTeleport teleportComponent = GetComponent<VRTK_BasicTeleport>();
             if (teleportComponent)
             {

@@ -75,7 +75,7 @@ public class TutorialManager : GameManager {
         targetGroup.OnTargetsDestroyed += new TargetsDestroyedHandler(TargetsDestroyed);
         cameraRig.GetComponent<VRTK_BasicTeleport>().Teleported += new TeleportEventHandler(OnTeleport);
     }
-	
+
 	// Update is called once per frame
 	protected override void Update () {
         base.Update();
@@ -456,7 +456,7 @@ public class TutorialManager : GameManager {
                 Instantiate(newObject, location, newObject.transform.rotation);
             }
 
-            
+
         }
     }
 

@@ -79,7 +79,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_Materials:
   - {fileID: 2100000, guid: 406981998f1234442a4f2eb50cfe07e1, type: 2}
-  m_SubsetIndices: 
+  m_SubsetIndices:
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
@@ -231,8 +231,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 32c1c9a5bbab2e54280027c0ecaf42db, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   waveFiles:
   - {fileID: 8300000, guid: 465e24e196f24c3498bbd20246f9f1ca, type: 3}
   - {fileID: 8300000, guid: 2ec0e14254efe4040b7ae3a0da46d5a6, type: 3}
@@ -254,8 +254,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 429a484b95998f84eaa98fa068caa5e9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   popPrefab: {fileID: 186482, guid: 9d2dddaae5c812841accc43e4da1fccd, type: 2}
   maxVelocity: 5
   lifetime: 15
@@ -285,11 +285,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 0}
       propertyPath: particlePrefab
-      value: 
+      value:
       objectReference: {fileID: 186482, guid: 9d2dddaae5c812841accc43e4da1fccd, type: 2}
     - target: {fileID: 0}
       propertyPath: explosionPrefab
-      value: 
+      value:
       objectReference: {fileID: 130084, guid: e2e229108d0b87d40b2777066eeb5158, type: 2}
     - target: {fileID: 0}
       propertyPath: lifetime
@@ -309,7 +309,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: lifetimeEndParticlePrefab
-      value: 
+      value:
       objectReference: {fileID: 186482, guid: a41945a8549c580408301691c2fd374e, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

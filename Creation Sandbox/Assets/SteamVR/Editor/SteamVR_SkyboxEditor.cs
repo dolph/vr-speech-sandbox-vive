@@ -99,7 +99,7 @@ public class SteamVR_SkyboxEditor : Editor
 					var assetName = string.Format(nameFormat, assetPath, target.name, i);
 					System.IO.File.WriteAllBytes(assetName, texture.EncodeToPNG());
 				}
-	
+
 				if (camera != tempCamera)
 				{
 					target.transform.localPosition = oldPosition;

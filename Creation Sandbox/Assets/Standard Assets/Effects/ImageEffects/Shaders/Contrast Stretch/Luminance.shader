@@ -1,7 +1,7 @@
 // Outputs luminance (grayscale) of the input image _MainTex
 
 Shader "Hidden/Contrast Stretch Luminance" {
-	
+
 Properties {
 	_MainTex ("Base (RGB)", 2D) = "white" {}
 }
@@ -10,7 +10,7 @@ Category {
 	SubShader {
 		Pass {
 			ZTest Always Cull Off ZWrite Off
-				
+
 CGPROGRAM
 #pragma vertex vert_img
 #pragma fragment frag

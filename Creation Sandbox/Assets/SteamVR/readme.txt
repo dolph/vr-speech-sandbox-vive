@@ -383,15 +383,15 @@ and this was an incomplete and unsupported solution.
 
 Files:
 
-Assets/Plugins/openvr_api.cs - This direct wrapper for the native SteamVR SDK support mirrors SteamVR.h and  
-is the only script required.  It exposes all functionality provided by SteamVR.  It is not recommended you make  
+Assets/Plugins/openvr_api.cs - This direct wrapper for the native SteamVR SDK support mirrors SteamVR.h and
+is the only script required.  It exposes all functionality provided by SteamVR.  It is not recommended you make
 changes to this file.  It should be kept in sync with the associated openvr_api dll.
 
-The remaining files found in Assets/SteamVR/Scripts are provided as a reference implementation, and to get you  
-up and running quickly and easily.  You are encouraged to modify these to suit your project's unique needs,  
+The remaining files found in Assets/SteamVR/Scripts are provided as a reference implementation, and to get you
+up and running quickly and easily.  You are encouraged to modify these to suit your project's unique needs,
 and provide feedback at http://steamcommunity.com/app/250820 or http://steamcommunity.com/app/358720/discussions
 
-Assets/SteamVR/Scenes/example.unity - A sample scene demonstrating the functionality provided by this plugin.   
+Assets/SteamVR/Scenes/example.unity - A sample scene demonstrating the functionality provided by this plugin.
 This also shows you how to set up a separate camera for rendering gui elements.
 
 
@@ -431,8 +431,8 @@ that is inconvenient, you can specify the 'origin' in the TrackedObject itself.
 Assets/SteamVR/Scripts/SteamVR_RenderModel.cs - Dynamically creates associated SteamVR provided models for tracked
 objects.  See <SteamVR Runtime Path>/resources/rendermodels for the full list of overrides.
 
-Assets/SteamVR/Scripts/SteamVR_Utils.cs - Various bits for working with the SteamVR API in Unity including a  
-simple event system, a RigidTransform class for working with vector/quaternion pairs, matrix conversions, and  
+Assets/SteamVR/Scripts/SteamVR_Utils.cs - Various bits for working with the SteamVR API in Unity including a
+simple event system, a RigidTransform class for working with vector/quaternion pairs, matrix conversions, and
 other useful functions.
 
 
@@ -465,8 +465,8 @@ updated before composited into the final view.
 
 OnGUI:
 
-Assets/SteamVR/Scripts/SteamVR_Menu.cs demonstrates use of OnGUI with SteamVR_Camera's overlay texture.  The  
-key is to set RenderTexture.active and restore it afterward.  Beware when also using a camera to render to the  
+Assets/SteamVR/Scripts/SteamVR_Menu.cs demonstrates use of OnGUI with SteamVR_Camera's overlay texture.  The
+key is to set RenderTexture.active and restore it afterward.  Beware when also using a camera to render to the
 same texture as it may clear your content.
 
 
@@ -504,8 +504,8 @@ Initializing - This event is sent when the hmd's tracking status changes to or f
 
 Calibrating - This event is sent when starting or stopping calibration with the new state.
 
-OutOfRange - This event is sent when losing or reacquiring absolute positional tracking.  This will 
-never fire for the Rift DK1 since it does not have positional tracking.  For camera based trackers, this 
+OutOfRange - This event is sent when losing or reacquiring absolute positional tracking.  This will
+never fire for the Rift DK1 since it does not have positional tracking.  For camera based trackers, this
 happens when the hmd exits and enters the camera's view.
 
 DeviceConnected - This event is sent when devices are connected or disconnected.  The device index is passed
@@ -522,8 +522,8 @@ I - toggle frame stats on/off
 
 Deploying on Steam:
 
-If you are releasing your game on Steam (i.e. have a Steam ID and are calling Steam_Init through the  
-Steamworks SDK), then you may want to check ISteamUtils::IsSteamRunningInVRMode() in order to determine if you  
+If you are releasing your game on Steam (i.e. have a Steam ID and are calling Steam_Init through the
+Steamworks SDK), then you may want to check ISteamUtils::IsSteamRunningInVRMode() in order to determine if you
 should automatically launch into VR mode or not.
 
 

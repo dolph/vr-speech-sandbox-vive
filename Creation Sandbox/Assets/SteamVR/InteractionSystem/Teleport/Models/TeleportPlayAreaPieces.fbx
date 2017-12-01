@@ -229,13 +229,13 @@ Objects:  {
 		}
 		Vertices: *18 {
 			a: -23.8999992609024,0.584999984130263,-0.19000000320375,-20.0200006365776,0.584999984130263,-0.19000000320375,-23.8999992609024,0.584999984130263,23.9500001072884,0,0.584999984130263,23.9500001072884,-20.0200006365776,0.584999984130263,20.0699999928474,0,0.584999984130263,20.0699999928474
-		} 
+		}
 		PolygonVertexIndex: *8 {
 			a: 0,2,4,-2,2,3,5,-5
-		} 
+		}
 		Edges: *7 {
 			a: 0,1,2,3,4,5,6
-		} 
+		}
 		GeometryVersion: 124
 		LayerElementNormal: 0 {
 			Version: 101
@@ -244,10 +244,10 @@ Objects:  {
 			ReferenceInformationType: "IndexToDirect"
 			Normals: *3 {
 				a: 0,1,0
-			} 
+			}
 			NormalsIndex: *8 {
 				a: 0,0,0,0,0,0,0,0
-			} 
+			}
 		}
 		LayerElementSmoothing: 0 {
 			Version: 102
@@ -256,7 +256,7 @@ Objects:  {
 			ReferenceInformationType: "Direct"
 			Smoothing: *2 {
 				a: 1,1
-			} 
+			}
 		}
 		LayerElementMaterial: 0 {
 			Version: 101
@@ -265,7 +265,7 @@ Objects:  {
 			ReferenceInformationType: "IndexToDirect"
 			Materials: *1 {
 				a: 0
-			} 
+			}
 		}
 		Layer: 0 {
 			Version: 100
@@ -289,13 +289,13 @@ Objects:  {
 		}
 		Vertices: *12 {
 			a: 49.9599993228912,0.584999984130263,23.9500001072884,-50,0.584999984130263,23.9500001072884,-50,0.584999984130263,20.0699999928474,49.9599993228912,0.584999984130263,20.0699999928474
-		} 
+		}
 		PolygonVertexIndex: *4 {
 			a: 0,3,2,-2
-		} 
+		}
 		Edges: *4 {
 			a: 0,1,2,3
-		} 
+		}
 		GeometryVersion: 124
 		LayerElementNormal: 0 {
 			Version: 101
@@ -304,10 +304,10 @@ Objects:  {
 			ReferenceInformationType: "IndexToDirect"
 			Normals: *3 {
 				a: 0,1,0
-			} 
+			}
 			NormalsIndex: *4 {
 				a: 0,0,0,0
-			} 
+			}
 		}
 		LayerElementUV: 0 {
 			Version: 101
@@ -316,10 +316,10 @@ Objects:  {
 			ReferenceInformationType: "IndexToDirect"
 			UV: *8 {
 				a: 0,1,1,1,1,0,0,0
-			} 
+			}
 			UVIndex: *4 {
 				a: 0,3,2,1
-			} 
+			}
 		}
 		LayerElementSmoothing: 0 {
 			Version: 102
@@ -328,7 +328,7 @@ Objects:  {
 			ReferenceInformationType: "Direct"
 			Smoothing: *1 {
 				a: 0
-			} 
+			}
 		}
 		LayerElementMaterial: 0 {
 			Version: 101
@@ -337,7 +337,7 @@ Objects:  {
 			ReferenceInformationType: "IndexToDirect"
 			Materials: *1 {
 				a: 0
-			} 
+			}
 		}
 		Layer: 0 {
 			Version: 100
@@ -406,22 +406,22 @@ Objects:  {
 ;------------------------------------------------------------------
 
 Connections:  {
-	
+
 	;Model::teleport_playarea_corner, Model::RootNode
 	C: "OO",559651552,0
-	
+
 	;Model::teleport_playarea_edge, Model::RootNode
 	C: "OO",559653872,0
-	
+
 	;Geometry::, Model::teleport_playarea_corner
 	C: "OO",84752880,559651552
-	
+
 	;Material::Teleport_PlaySpace, Model::teleport_playarea_corner
 	C: "OO",546884352,559651552
-	
+
 	;Geometry::, Model::teleport_playarea_edge
 	C: "OO",84752192,559653872
-	
+
 	;Material::Teleport_PlaySpace, Model::teleport_playarea_edge
 	C: "OO",546884352,559653872
 }

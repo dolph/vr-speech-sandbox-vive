@@ -16,7 +16,7 @@ Shader "Valve/VR/Highlight"
 
 	//-------------------------------------------------------------------------------------------------------------------------------------------------------------
 	CGINCLUDE
-		
+
 		// Pragmas --------------------------------------------------------------------------------------------------------------------------------------------------
 		#pragma target 5.0
 		#pragma only_renderers d3d11 vulkan
@@ -32,7 +32,7 @@ Shader "Valve/VR/Highlight"
 			float2 uv : TEXCOORD0;
 			fixed4 color : COLOR;
 		};
-		
+
 		struct VertexOutput
 		{
 			float2 uv : TEXCOORD0;
@@ -46,7 +46,7 @@ Shader "Valve/VR/Highlight"
 		float4 _TintColor;
 		float _SeeThru;
 		float _Darken;
-				
+
 		// MainVs ---------------------------------------------------------------------------------------------------------------------------------------------------
 		VertexOutput MainVS( VertexInput i )
 		{
@@ -58,10 +58,10 @@ Shader "Valve/VR/Highlight"
 #endif
 			o.uv = TRANSFORM_TEX( i.uv, _MainTex );
 			o.color = i.color;
-			
+
 			return o;
 		}
-		
+
 		// MainPs ---------------------------------------------------------------------------------------------------------------------------------------------------
 		float4 MainPS( VertexOutput i ) : SV_Target
 		{
